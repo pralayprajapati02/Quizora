@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#E3E3E3</color>
+    <color name="white">#1C1C1C</color>
+    <color name="red">#BA252B</color>
+    <color name="progress_bar">#7FE3E3E3</color>
+    <color name="orange">#FC692B</color>
+    <color name="gray">#1A1A1B</color>
+    <color name="enable_icon">#FF000000</color>
+    <color name="disable_icon">#64544C</color>
+    <color name="animal">#9DD5D6</color>
+    <color name="anime_and_manga">#9A6546</color>
+    <color name="art">#A770CE</color>
+    <color name="board_and_games">#4891E0</color>
+    <color name="books">#D3629D</color>
+    <color name="cartoon_and_animation">#D4DB59</color>
+    <color name="celebrities">#FAB9BE</color>
+    <color name="comic">#D3B35A</color>
+    <color name="computer">#C5E0FC</color>
+    <color name="film">#72CCD7</color>
+    <color name="gadgets">#7898BC</color>
+    <color name="general_knowledge">#4891E0</color>
+    <color name="geography">#C5C5C5</color>
+    <color name="history">#9A867E</color>
+    <color name="mathematics">#FFF6E5</color>
+    <color name="music">#8B95AA</color>
+    <color name="musical_and_theaters">#FAD2D9</color>
+    <color name="mythology">#7E7B91</color>
+    <color name="politics">#B0B0B0</color>
+    <color name="science_and_nature">#A186E1</color>
+    <color name="sports">#A1CC6A</color>
+    <color name="television">#BAD2DA</color>
+    <color name="vehicle">#FED466</color>
+    <color name="video_game">#C6C2B5</color>
+</resources>

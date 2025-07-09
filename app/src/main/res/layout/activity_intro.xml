@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activity.IntroActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clTopLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="380dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/top_left_shape"
+        app:layout_constraintEnd_toStartOf="@+id/clTopRight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvCLTopLeft"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/dohyeon_regular"
+            android:maxLines="3"
+            android:text="PLAY\nAND\nLEARN"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/imvCLTopLeft"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imvCLTopLeft"
+            android:layout_width="180dp"
+            android:layout_height="160dp"
+            android:src="@drawable/white_tshirt_curly_hair_boy"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clTopRight"
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/top_right_shape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/clTopLeft"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imvCLTopRight"
+            android:layout_width="180dp"
+            android:layout_height="160dp"
+            android:src="@drawable/green_tshirt_curly_hair_boy"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clCenterRight"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/center_right_shape"
+        android:padding="6dp"
+        app:layout_constraintEnd_toEndOf="@+id/clTopRight"
+        app:layout_constraintStart_toStartOf="@+id/clTopRight"
+        app:layout_constraintTop_toBottomOf="@+id/clTopRight">
+
+        <TextView
+            android:id="@+id/tvCLCenterRight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dohyeon_regular"
+            android:gravity="end"
+            android:text="READY TO TRAIN YOUR BRAIN LIKE NEVER BEFORE ?"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clBottomRight"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bottom_right_shape"
+        app:layout_constraintEnd_toEndOf="@+id/clTopRight"
+        app:layout_constraintStart_toStartOf="@+id/clTopRight"
+        app:layout_constraintTop_toBottomOf="@+id/clCenterRight">
+
+        <ImageView
+            android:id="@+id/imvCLCenterRight"
+            android:layout_width="180dp"
+            android:layout_height="160dp"
+            android:src="@drawable/yello_tshirt_scarf_hair_girl"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clBottomLeft"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bottom_left_shape"
+        app:layout_constraintBottom_toBottomOf="@+id/clBottomRight"
+        app:layout_constraintEnd_toEndOf="@+id/clTopLeft"
+        app:layout_constraintStart_toStartOf="@+id/clTopLeft"
+        app:layout_constraintTop_toBottomOf="@+id/clTopLeft">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clOrangeCircle"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/orange_shape"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvCLBottomLeft"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imvOrangeCircle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/party_popper_svgrepo_com"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tvCLBottomLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dohyeon_regular"
+            android:gravity="end"
+            android:text="Fun games!"
+            android:textColor="@color/white"
+            android:textSize="22dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/clOrangeCircle"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/imvOrangeGlow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/orange_glow"
+        app:layout_constraintBottom_toBottomOf="@+id/btnGetStart"
+        app:layout_constraintEnd_toEndOf="@+id/btnGetStart"
+        app:layout_constraintStart_toStartOf="@+id/btnGetStart"
+        app:layout_constraintTop_toTopOf="@+id/btnGetStart" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btnGetStart"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/orange_shape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/clPlayStore">
+
+        <TextView
+            android:id="@+id/tvGetStart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:gravity="center"
+            android:text="Get Started"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clPlayStore"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/bottom_right_shape"
+        app:layout_constraintBottom_toBottomOf="@+id/btnGetStart"
+        app:layout_constraintEnd_toStartOf="@+id/btnGetStart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnGetStart">
+
+        <ImageView
+            android:id="@+id/imvPlayStore"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/google_play_store_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/btnGetStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clBottomRight">
+
+        <TextView
+            android:id="@+id/tvAppName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dohyeon_regular"
+            android:gravity="center"
+            android:text="Quizora Game"
+            android:letterSpacing=".1"
+            android:textColor="@color/black"
+            android:textSize="42sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvIntroSlogan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/dohyeon_regular"
+            android:gravity="center"
+            android:text="Perfect game to challenge your brain and have hours of fun!"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/tvAppName"
+            app:layout_constraintStart_toStartOf="@+id/tvAppName"
+            app:layout_constraintTop_toBottomOf="@+id/tvAppName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
