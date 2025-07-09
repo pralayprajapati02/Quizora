@@ -227,27 +227,39 @@
     </LinearLayout>
 
     <com.google.android.material.card.MaterialCardView
-        app:cardCornerRadius="10dp"
+        android:id="@+id/materialCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="25dp"
         app:cardBackgroundColor="@color/progress_bar"
-        android:layout_width="wrap_content"
-        app:strokeWidth="0dp"
-        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/imgBack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imgBack" >
+        app:layout_constraintTop_toTopOf="@+id/imgBack"
+        app:strokeWidth="0dp">
 
-            <TextView
-                android:id="@+id/tvTimeLimit"
-                android:layout_margin="10dp"
-                android:textStyle="bold"
-                android:fontFamily="@font/dohyeon_regular"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:text="00:20"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/tvTimeLimit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/dohyeon_regular"
+            android:text="00:20"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:id="@+id/imOpenChatBot"
+        android:padding="10dp"
+        android:src="@drawable/send"
+        android:layout_marginEnd="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/materialCardView"
+        app:layout_constraintEnd_toStartOf="@+id/materialCardView"
+        app:layout_constraintTop_toTopOf="@+id/materialCardView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

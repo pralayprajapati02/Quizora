@@ -7,20 +7,29 @@ import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.WindowInsets
 import android.view.WindowInsetsController
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
+import androidx.core.view.marginTop
 import androidx.lifecycle.ViewModelProvider
 import com.example.quizora.R
 import com.example.quizora.api.QuizInterface
@@ -155,6 +164,10 @@ class QuizActivity : AppCompatActivity() {
                 }
             })
             animatorOut.start()
+        }
+
+        binding.imOpenChatBot.setOnClickListener{
+            showChatbotDialog()
         }
 
         binding.imgBack.setOnClickListener {
@@ -334,6 +347,63 @@ class QuizActivity : AppCompatActivity() {
                 binding.imvOrangeGlow.alpha = 1F
             }
         }.start()
+    }
+
+    private fun showChatbotDialog() {
+        val view = LayoutInflater.from(this).inflate(R.layout.chat_bot_dialog_box, null)
+
+        val dialog = AlertDialog.Builder(this)
+            .setView(view)
+            .setCancelable(true)
+            .create()
+
+        val chatContainer = view.findViewById<LinearLayout>(R.id.chatContainer)
+        val etMessage = view.findViewById<EditText>(R.id.etMessage)
+        val btnSend = view.findViewById<ImageView>(R.id.btnSend)
+
+        btnSend.setOnClickListener {
+            val message = etMessage.text.toString()
+            if (message.isNotBlank()) {
+                val userMsg = TextView(this).apply {
+                    text = message
+                    setBackgroundResource(R.drawable.rounded_bg)
+                    setPadding(16, 8, 16, 8)
+                    setTextColor(Color.BLACK)
+                    val params = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+                    val marginInDp = 8
+                    val scale = resources.displayMetrics.density
+                    val marginInPx = (marginInDp * scale).toInt()
+                    params.setMargins(marginInPx, marginInPx, marginInPx, marginInPx)
+                    params.gravity = Gravity.END
+                    layoutParams = params
+                }
+                chatContainer.addView(userMsg)
+                etMessage.text.clear()
+
+                // Simulate bot reply
+                val botMsg = TextView(this).apply {
+                    text = "I'm a bot. You said: $message"
+                    setBackgroundResource(R.drawable.rounded_bg)
+                    setPadding(16, 8, 16, 8)
+                    setTextColor(Color.BLACK)
+                    val params = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+                    val marginInDp = 8
+                    val scale = resources.displayMetrics.density
+                    val marginInPx = (marginInDp * scale).toInt()
+                    params.setMargins(marginInPx, marginInPx, marginInPx, marginInPx)
+                    layoutParams = params
+                }
+                chatContainer.addView(botMsg)
+            }
+        }
+
+        dialog.show()
     }
 
 
