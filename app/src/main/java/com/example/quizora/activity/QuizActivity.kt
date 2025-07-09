@@ -8,6 +8,7 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -29,7 +30,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
-import androidx.core.view.marginTop
 import androidx.lifecycle.ViewModelProvider
 import com.example.quizora.R
 import com.example.quizora.api.QuizInterface
@@ -39,6 +39,13 @@ import com.example.quizora.repository.QuizRepository
 import com.example.quizora.utils.Normalizer
 import com.example.quizora.viewModel.QuizViewModel
 import com.example.quizora.viewModel.QuizViewModelFactory
+import com.google.ai.client.generativeai.GenerativeModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class QuizActivity : AppCompatActivity() {
 
@@ -53,6 +60,7 @@ class QuizActivity : AppCompatActivity() {
     private val difficultyList = ArrayList<String>()
     private var currentIndex = 0
     private var score = 0
+    private var aiCount = 0
     private var normalOptions = listOf<List<String>>()
     private var normalCategory = listOf<String>()
     private var countDownTimer: CountDownTimer? = null
@@ -81,6 +89,10 @@ class QuizActivity : AppCompatActivity() {
         val quizInterface = QuizUtilities.getInstance().create(QuizInterface::class.java)
         val quizRepository = QuizRepository(quizInterface, amount, actualCategory, difficulty, type)
         var isFlipped = false
+        val generativeModel = GenerativeModel(
+            modelName = "gemini-2.5-pro",  // or another available model
+            apiKey = "AIzaSyBTiZq5SxcS7SpEJzWaE8tVT6fH57Yh7_Q"
+        )
 
         quizViewModel =
             ViewModelProvider(this, QuizViewModelFactory(quizRepository))[QuizViewModel::class]
@@ -167,7 +179,11 @@ class QuizActivity : AppCompatActivity() {
         }
 
         binding.imOpenChatBot.setOnClickListener{
-            showChatbotDialog()
+            if (aiCount <= 2){
+                showChatbotDialog(generativeModel)
+            }else{
+                Toast.makeText(this, "You Can Use AI Only 3 Times", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.imgBack.setOnClickListener {
@@ -349,7 +365,8 @@ class QuizActivity : AppCompatActivity() {
         }.start()
     }
 
-    private fun showChatbotDialog() {
+    private fun showChatbotDialog(generativeModel: GenerativeModel) {
+
         val view = LayoutInflater.from(this).inflate(R.layout.chat_bot_dialog_box, null)
 
         val dialog = AlertDialog.Builder(this)
@@ -357,18 +374,20 @@ class QuizActivity : AppCompatActivity() {
             .setCancelable(true)
             .create()
 
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
         val chatContainer = view.findViewById<LinearLayout>(R.id.chatContainer)
         val etMessage = view.findViewById<EditText>(R.id.etMessage)
         val btnSend = view.findViewById<ImageView>(R.id.btnSend)
 
         btnSend.setOnClickListener {
+            aiCount++
             val message = etMessage.text.toString()
+            val prompt = "Context: $this\n\nQuestion: $message"
             if (message.isNotBlank()) {
-                val userMsg = TextView(this).apply {
-                    text = message
-                    setBackgroundResource(R.drawable.rounded_bg)
-                    setPadding(16, 8, 16, 8)
-                    setTextColor(Color.BLACK)
+                val userMessageLayout = LinearLayout(this).apply {
+                    orientation = LinearLayout.HORIZONTAL
+                    gravity = Gravity.END
                     val params = LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.WRAP_CONTENT,
                         LinearLayout.LayoutParams.WRAP_CONTENT
@@ -380,26 +399,70 @@ class QuizActivity : AppCompatActivity() {
                     params.gravity = Gravity.END
                     layoutParams = params
                 }
-                chatContainer.addView(userMsg)
-                etMessage.text.clear()
-
-                // Simulate bot reply
-                val botMsg = TextView(this).apply {
-                    text = "I'm a bot. You said: $message"
+                val userMsg = TextView(this).apply {
+                    text = message
                     setBackgroundResource(R.drawable.rounded_bg)
                     setPadding(16, 8, 16, 8)
                     setTextColor(Color.BLACK)
-                    val params = LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT
-                    )
-                    val marginInDp = 8
-                    val scale = resources.displayMetrics.density
-                    val marginInPx = (marginInDp * scale).toInt()
-                    params.setMargins(marginInPx, marginInPx, marginInPx, marginInPx)
-                    layoutParams = params
+
                 }
-                chatContainer.addView(botMsg)
+                val userImage = ImageView(this).apply {
+                    setImageResource(R.drawable.user)
+                }
+                userMessageLayout.addView(userMsg)
+                userMessageLayout.addView(userImage)
+                chatContainer.addView(userMessageLayout)
+                etMessage.text.clear()
+
+                GlobalScope.launch(Dispatchers.Main) {
+                    // Create a loading TextView
+                    val botMessageLayout = LinearLayout(this@QuizActivity).apply {
+                        orientation = LinearLayout.HORIZONTAL
+                        gravity = Gravity.START
+                        val params = LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                        )
+                        val marginInDp = 8
+                        val scale = resources.displayMetrics.density
+                        val marginInPx = (marginInDp * scale).toInt()
+                        params.setMargins(marginInPx, marginInPx, marginInPx, marginInPx)
+                        params.gravity = Gravity.END
+                        layoutParams = params
+                    }
+                    val loadingText = TextView(this@QuizActivity).apply {
+                        setBackgroundResource(R.drawable.rounded_bg)
+                        setPadding(16, 8, 16, 8)
+                        setTextColor(Color.GRAY)
+                        text = "..."
+                    }
+                    val botImage = ImageView(this@QuizActivity).apply {
+                        setImageResource(R.drawable.gemini)
+                    }
+                    botMessageLayout.addView(botImage)
+                    botMessageLayout.addView(loadingText)
+                    chatContainer.addView(botMessageLayout)
+                    // Animate the loading dots
+                    val loadingJob = launch {
+                        val dots = listOf(".", "..", "...")
+                        var index = 0
+                        while (isActive) {
+                            loadingText.text = dots[index % dots.size]
+                            index++
+                            delay(500)
+                        }
+                    }
+                    // Fetch response from Gemini in IO thread
+                    val answer = withContext(Dispatchers.IO) {
+                        val response = generativeModel.generateContent(prompt)
+                        response.text ?: "Sorry, I couldn't understand that."
+                    }
+                    // Stop loading and update the message
+                    loadingJob.cancel()
+
+                    loadingText.text = answer
+                    loadingText.setTextColor(Color.BLACK)
+                }
             }
         }
 

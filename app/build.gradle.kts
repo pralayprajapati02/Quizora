@@ -63,5 +63,7 @@ dependencies {
     implementation (libs.androidx.lifecycle.viewmodel.ktx)
     // LiveData
     implementation (libs.androidx.lifecycle.livedata.ktx)
+    //Generative AI
+    implementation ("com.google.ai.client.generativeai:generativeai:0.9.0")
 
 }

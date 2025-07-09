@@ -254,7 +254,7 @@
     <ImageView
         android:id="@+id/imOpenChatBot"
         android:padding="10dp"
-        android:src="@drawable/send"
+        android:src="@drawable/gemini"
         android:layout_marginEnd="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
