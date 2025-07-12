@@ -65,11 +65,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigationView.setOnItemSelectedListener { menuItem->
             when(menuItem.itemId){
-                R.id.home->{
-                    startActivity(Intent(this,MainActivity::class.java))
-                    finish()
-                    true
-                }
                 R.id.randomQuiz->{
                     val intent = Intent(this, QuizActivity::class.java)
                     intent.putExtra("amount", 10)

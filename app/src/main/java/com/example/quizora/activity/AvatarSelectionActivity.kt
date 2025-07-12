@@ -6,7 +6,6 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.Surface
 import android.view.WindowManager
 import android.widget.Toast
@@ -85,9 +84,6 @@ class AvatarSelectionActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please Fill User Name and save", Toast.LENGTH_LONG).show()
             }
             editor.apply()
-            val saveAvatar = sharedPreferences.getInt("user_avatar", 0 )
-            Log.d("userAvatarInt", saveAvatar.toString())
-            Log.d("userName", userName.toString())
         }
 
     }

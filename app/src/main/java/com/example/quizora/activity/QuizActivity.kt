@@ -89,10 +89,8 @@ class QuizActivity : AppCompatActivity() {
         val quizInterface = QuizUtilities.getInstance().create(QuizInterface::class.java)
         val quizRepository = QuizRepository(quizInterface, amount, actualCategory, difficulty, type)
         var isFlipped = false
-        val generativeModel = GenerativeModel(
-            modelName = "gemini-2.5-pro",  // or another available model
-            apiKey = "AIzaSyBTiZq5SxcS7SpEJzWaE8tVT6fH57Yh7_Q"
-        )
+
+
 
         quizViewModel =
             ViewModelProvider(this, QuizViewModelFactory(quizRepository))[QuizViewModel::class]
@@ -132,8 +130,10 @@ class QuizActivity : AppCompatActivity() {
         binding.btnNextQuestion.setBackgroundResource(R.drawable.disable_button_shape)
         binding.btnNextQuestion.setOnClickListener {
             if (currentIndex + 1 >= questionList.size) {
-                Toast.makeText(this, "No more questions", Toast.LENGTH_SHORT).show()
-                Toast.makeText(this, "Score = $score", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, QuizResultActivity::class.java)
+                intent.putExtra("Score",score)
+                startActivity(intent)
+                finish()
                 return@setOnClickListener
             }
             val scale = applicationContext.resources.displayMetrics.density
@@ -180,6 +180,10 @@ class QuizActivity : AppCompatActivity() {
 
         binding.imOpenChatBot.setOnClickListener{
             if (aiCount <= 2){
+                val generativeModel = GenerativeModel(
+                    modelName = "gemini-2.5-pro",  // or another available model
+                    apiKey = "AIzaSyBTiZq5SxcS7SpEJzWaE8tVT6fH57Yh7_Q"
+                )
                 showChatbotDialog(generativeModel)
             }else{
                 Toast.makeText(this, "You Can Use AI Only 3 Times", Toast.LENGTH_SHORT).show()
@@ -191,13 +195,7 @@ class QuizActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressedDispatcher.onBackPressed()
-        val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("backPressed", "Load")
-        startActivity(intent)
-        finish()
-    }
+
 
     private fun setQuestionToViews(
         questionList: ArrayList<String>,
@@ -208,7 +206,9 @@ class QuizActivity : AppCompatActivity() {
         correctAnswerList: ArrayList<String>,
         difficultyList: ArrayList<String>,
     ) {
-
+        binding.tvCurrentQuestionNumber.text = String.format("${currentIndex + 1} of ${questionList.size}")
+        binding.pbProgress.max = questionList.size
+        binding.pbProgress.progress = currentIndex + 1
         binding.tvQuestionNo.text = String.format("Question No : ${currentIndex + 1}")
         binding.tvQuestionCategory.text = normalCategory[currentIndex]
         binding.tvQuestion.text = questionList[currentIndex]
@@ -317,8 +317,19 @@ class QuizActivity : AppCompatActivity() {
                         repeatMode = ValueAnimator.REVERSE
                         repeatCount = 1
                     }
+                    val imgScaleUp = ObjectAnimator.ofFloat(binding.imgClock, "scaleX", 1f, 1.2f).apply {
+                        duration = 300
+                        repeatMode = ValueAnimator.REVERSE
+                        repeatCount = 1
+                    }
+                    val imgScaleY = ObjectAnimator.ofFloat(binding.imgClock, "scaleY", 1f, 1.2f).apply {
+                        duration = 300
+                        repeatMode = ValueAnimator.REVERSE
+                        repeatCount = 1
+                    }
                     AnimatorSet().apply {
                         playTogether(scaleUp, scaleY)
+                        playTogether(imgScaleUp,imgScaleY)
                         start()
                     }
                     // Vibrate
@@ -469,5 +480,16 @@ class QuizActivity : AppCompatActivity() {
         dialog.show()
     }
 
+    override fun onBackPressed() {
+        countDownTimer?.cancel()
+        super.onBackPressedDispatcher.onBackPressed()
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
+    }
+
+    override fun onDestroy() {
+        countDownTimer?.cancel()
+        super.onDestroy()
+    }
 
 }

@@ -64,6 +64,8 @@ dependencies {
     // LiveData
     implementation (libs.androidx.lifecycle.livedata.ktx)
     //Generative AI
-    implementation ("com.google.ai.client.generativeai:generativeai:0.9.0")
+    implementation (libs.generativeai)
+    //lottie Files
+    implementation (libs.lottie)
 
 }
