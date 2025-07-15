@@ -76,6 +76,10 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.customQuiz->{
+                    val intent = Intent(this, QuizResultActivity::class.java)
+                    intent.putExtra("Score", 10)
+                    this.startActivity(intent)
+                    finish()
                     true
                 }
                 R.id.setting->{
@@ -85,9 +89,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-
-        val backPressed = intent.getStringExtra("backPressed")
-        if (backPressed == "Load"){}
 
 
     }

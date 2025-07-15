@@ -73,17 +73,19 @@ class AvatarSelectionActivity : AppCompatActivity() {
             if (avatarImgValue>0 && userName.isNotEmpty()){
                 editor.putInt("user_avatar", avatarImgValue)
                 editor.putString("user_name", userName.toString())
+                editor.apply()
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }else if (userName.isNotEmpty()){
                 editor.putInt("user_avatar", R.drawable.green_tshirt_curly_hair_boy)
                 editor.putString("user_name", userName.toString())
+                editor.apply()
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }else{
                 Toast.makeText(this, "Please Fill User Name and save", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
             }
-            editor.apply()
         }
 
     }

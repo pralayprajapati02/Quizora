@@ -5,6 +5,7 @@
     <color name="progress_bar">#801C1C1C</color>
     <color name="orange">#FC692B</color>
     <color name="red">#BA252B</color>
+    <color name="green">#019247</color>
     <color name="gray">#ECEBF0</color>
     <color name="enable_icon">#FF000000</color>
     <color name="disable_icon">#CFB09D</color>

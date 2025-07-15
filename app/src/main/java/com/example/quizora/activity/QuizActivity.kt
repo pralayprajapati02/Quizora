@@ -132,6 +132,7 @@ class QuizActivity : AppCompatActivity() {
             if (currentIndex + 1 >= questionList.size) {
                 val intent = Intent(this, QuizResultActivity::class.java)
                 intent.putExtra("Score",score)
+                intent.putExtra("totalNoOfQuestion",amount)
                 startActivity(intent)
                 finish()
                 return@setOnClickListener
