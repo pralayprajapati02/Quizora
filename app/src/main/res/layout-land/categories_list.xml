@@ -52,11 +52,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvCategoryName" />
 
             <ImageView
-                android:scaleType="centerCrop"
                 android:id="@+id/imgCategoryIcon"
                 android:layout_width="100dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="-5dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/general_knowledge"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

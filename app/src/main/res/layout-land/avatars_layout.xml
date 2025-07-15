@@ -18,13 +18,13 @@
         app:shapeAppearanceOverlay="@style/circleImageView" />
 
     <ImageView
-        android:visibility="gone"
         android:id="@+id/imvSelectedAvatar"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="-2dp"
         android:scaleType="centerCrop"
         android:src="@drawable/selected_icon"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/simvAvatar"
         app:layout_constraintEnd_toEndOf="@+id/simvAvatar"
         app:layout_constraintStart_toStartOf="@+id/simvAvatar"

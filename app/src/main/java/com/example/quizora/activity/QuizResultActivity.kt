@@ -2,6 +2,7 @@ package com.example.quizora.activity
 
 import android.animation.ValueAnimator
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.RenderEffect
 import android.graphics.Shader
@@ -9,6 +10,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Looper
 import android.provider.CalendarContract.Colors
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowInsets
@@ -43,6 +45,11 @@ class QuizResultActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         var didWin: Boolean? = null
+        val score = intent.getIntExtra("Score", 10)
+        val noOfQuestion = intent.getIntExtra("totalNoOfQuestion", 49)
+        val sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val coinValue = sharedPreferences.getInt("coin",0)
 
         val winMessages = listOf(
             "Great job! You nailed it with confidence and skill!",
@@ -60,9 +67,6 @@ class QuizResultActivity : AppCompatActivity() {
             "It’s okay to lose — champions are made through practice!"
         )
 
-
-        val score = intent.getIntExtra("Score", 10)
-        val noOfQuestion = intent.getIntExtra("totalNoOfQuestion", 49)
         if (score >= (noOfQuestion * 80 / 100)) {
             didWin = true
             binding.tvScore.setTextColor(ContextCompat.getColor(this, R.color.green))
@@ -90,37 +94,37 @@ class QuizResultActivity : AppCompatActivity() {
         if (didWin){
             when (noOfQuestion) {
                 in 10..19 -> {
-                    animateNumber(50,binding.tvNumberOfCoinEarned)
+                    animateNumber(50,binding.tvNumberOfCoinEarned,editor,coinValue)
                 }
                 in 20..29 -> {
-                    animateNumber(100,binding.tvNumberOfCoinEarned)
+                    animateNumber(100,binding.tvNumberOfCoinEarned,editor,coinValue)
                 }
                 in 30..39 -> {
-                    animateNumber(150,binding.tvNumberOfCoinEarned)
+                    animateNumber(150,binding.tvNumberOfCoinEarned,editor,coinValue)
                 }
                 in 40..49 -> {
-                    animateNumber(200,binding.tvNumberOfCoinEarned)
+                    animateNumber(200,binding.tvNumberOfCoinEarned, editor,coinValue)
                 }
                 50 -> {
-                    animateNumber(250,binding.tvNumberOfCoinEarned)
+                    animateNumber(250,binding.tvNumberOfCoinEarned,editor,coinValue)
                 }
             }
         }else{
             when (noOfQuestion) {
                 in 10..19 -> {
-                    animateNumberReverse(50,binding.tvNumberOfCoinEarned,3000L)
+                    animateNumberReverse(50,binding.tvNumberOfCoinEarned,editor,coinValue)
                 }
                 in 20..29 -> {
-                    animateNumberReverse(100,binding.tvNumberOfCoinEarned,3000L)
+                    animateNumberReverse(100,binding.tvNumberOfCoinEarned,editor,coinValue)
                 }
                 in 30..39 -> {
-                    animateNumberReverse(150,binding.tvNumberOfCoinEarned,3000L)
+                    animateNumberReverse(150,binding.tvNumberOfCoinEarned,editor,coinValue)
                 }
                 in 40..49 -> {
-                    animateNumberReverse(200,binding.tvNumberOfCoinEarned,3000L)
+                    animateNumberReverse(200,binding.tvNumberOfCoinEarned,editor,coinValue)
                 }
                 50 -> {
-                    animateNumberReverse(250,binding.tvNumberOfCoinEarned,3000L)
+                    animateNumberReverse(250,binding.tvNumberOfCoinEarned,editor,coinValue)
                 }
             }
         }
@@ -140,7 +144,8 @@ class QuizResultActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun animateNumber(target: Int, textView: TextView, duration: Long = 1500L) {
+    private fun animateNumber(target: Int, textView: TextView, editor: SharedPreferences.Editor,coinValue : Int, duration: Long = 1500L) {
+        editor.putInt("coin",coinValue+target)
         val animator = ValueAnimator.ofInt(0, target)
         animator.duration = duration
         animator.addUpdateListener { animation ->
@@ -148,9 +153,11 @@ class QuizResultActivity : AppCompatActivity() {
             textView.text = String.format(" $value")
         }
         animator.start()
+        editor.apply()
     }
 
-    private fun animateNumberReverse(target: Int, textView: TextView, duration: Long = 1500L) {
+    private fun animateNumberReverse(target: Int, textView: TextView, editor : SharedPreferences.Editor,coinValue : Int, duration: Long = 3000L) {
+        editor.putInt("coin",coinValue+0)
         val animator = ValueAnimator.ofInt(target,0)
         animator.duration = duration
         animator.addUpdateListener { animation ->
@@ -158,5 +165,6 @@ class QuizResultActivity : AppCompatActivity() {
             textView.text = String.format(" $value")
         }
         animator.start()
+        editor.apply()
     }
 }

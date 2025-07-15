@@ -35,10 +35,10 @@
         app:shapeAppearanceOverlay="@style/circleImageView" />
 
     <TextView
-        android:layout_marginStart="15dp"
         android:id="@+id/tvUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
         android:fontFamily="@font/kanit_semibold"
         android:text="Username"
         android:textColor="@color/black"
@@ -84,10 +84,10 @@
         android:id="@+id/tvAvatar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/kanit_semibold"
         android:text="Avatars"
         android:textColor="@color/black"
-        android:layout_marginTop="20dp"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/tvUsername"
         app:layout_constraintTop_toBottomOf="@+id/tvCharacterCount" />

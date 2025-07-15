@@ -56,10 +56,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_marginTop="10dp"
             android:id="@+id/imvCLTopRight"
             android:layout_width="150dp"
             android:layout_height="140dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/green_tshirt_curly_hair_boy"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -71,8 +71,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clCenterRight"
         android:layout_width="0dp"
-        android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:background="@drawable/center_right_shape"
         android:padding="6dp"
         app:layout_constraintBottom_toTopOf="@+id/clBottomRight"
@@ -108,9 +108,9 @@
 
         <ImageView
             android:id="@+id/imvCLCenterRight"
-            android:layout_marginTop="10dp"
             android:layout_width="150dp"
             android:layout_height="140dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/yello_tshirt_scarf_hair_girl"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

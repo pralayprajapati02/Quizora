@@ -172,10 +172,10 @@
     </com.google.android.material.card.MaterialCardView>
 
     <ImageView
-        android:alpha="0"
         android:id="@+id/imvOrangeGlow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:alpha="0"
         android:src="@drawable/orange_glow"
         app:layout_constraintBottom_toBottomOf="@+id/btnNextQuestion"
         app:layout_constraintEnd_toEndOf="@+id/btnNextQuestion"
@@ -201,9 +201,9 @@
     </androidx.appcompat.widget.AppCompatButton>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/cvQuestionAndOptions"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -211,16 +211,16 @@
 
         <TextView
             android:id="@+id/tvCurrentQuestionNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="10dp"
-            android:textStyle="bold"
             android:fontFamily="@font/dohyeon_regular"
+            android:gravity="end"
             android:textColor="@color/black"
             android:textSize="12sp"
-            android:gravity="end"
-            android:layout_gravity="end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:textStyle="bold" />
 
         <ProgressBar
             android:id="@+id/pb_progress"
@@ -250,18 +250,18 @@
         app:strokeWidth="0dp">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
             <TextView
-                android:padding="10dp"
-                android:layout_gravity="center"
-                android:gravity="center"
                 android:id="@+id/tvTimeLimit"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:fontFamily="@font/dohyeon_regular"
+                android:gravity="center"
+                android:padding="10dp"
                 android:text="00:20"
                 android:textColor="@color/black"
                 android:textSize="18sp"
@@ -269,12 +269,12 @@
 
             <ImageView
                 android:id="@+id/imgClock"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
-                android:src="@drawable/clock"
-                android:layout_width="30dp"
-                android:layout_height="30dp"/>
+                android:src="@drawable/clock" />
 
         </LinearLayout>
 
@@ -282,11 +282,11 @@
 
     <ImageView
         android:id="@+id/imOpenChatBot"
-        android:padding="10dp"
-        android:src="@drawable/gemini"
-        android:layout_marginEnd="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:padding="10dp"
+        android:src="@drawable/gemini"
         app:layout_constraintBottom_toBottomOf="@+id/materialCardView"
         app:layout_constraintEnd_toStartOf="@+id/materialCardView"
         app:layout_constraintTop_toTopOf="@+id/materialCardView" />

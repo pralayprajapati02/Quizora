@@ -50,21 +50,21 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:layout_marginTop="5dp"
                 android:id="@+id/imvWinLoseIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="300dp"
+                android:layout_marginTop="5dp"
                 android:src="@drawable/bomb"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvQuizScore" />
 
             <TextView
-                android:layout_marginTop="5dp"
                 android:id="@+id/tvGreetings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
                 android:fontFamily="@font/kanit_semibold"
                 android:text="CONGRATS!"
                 android:textColor="@color/black"

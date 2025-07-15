@@ -53,6 +53,9 @@ class MainActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE)
         val userName = sharedPreferences.getString("user_name", "")
         val userAvatar = sharedPreferences.getInt("user_avatar",0)
+        val coinValue = sharedPreferences.getInt("coin",0)
+
+        binding.tvUserCoins.text = coinValue.toString()
 
         binding.simvUserAvatar.setImageResource(userAvatar)
         binding.tvUserName.text = userName

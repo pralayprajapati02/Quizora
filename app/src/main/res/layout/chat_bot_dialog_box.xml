@@ -1,66 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/white"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:strokeWidth="0dp"
     android:layout_margin="5dp"
-    app:cardCornerRadius="20dp"
     android:maxWidth="400dp"
-    android:maxHeight="300dp">
+    android:maxHeight="300dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="20dp"
+    app:strokeWidth="0dp">
 
     <LinearLayout
-        android:padding="16dp"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <ScrollView
-            android:background="@color/white"
             android:id="@+id/scrollChat"
-            android:fillViewport="true"
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="200dp"
+            android:background="@color/white"
+            android:fillViewport="true">
 
             <LinearLayout
-                android:background="@color/white"
                 android:id="@+id/chatContainer"
-                android:orientation="vertical"
-                android:padding="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="8dp" />
 
         </ScrollView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:paddingTop="8dp">
 
             <EditText
                 android:id="@+id/etMessage"
-                android:layout_weight="1"
                 android:layout_width="0dp"
-                android:textSize="18sp"
-                android:fontFamily="@font/dohyeon_regular"
-                android:textColorHint="@color/black"
-                android:textColor="@color/black"
-                android:alpha="0.6"
                 android:layout_height="wrap_content"
-                android:hint="Type your message"
+                android:layout_weight="1"
+                android:alpha="0.6"
                 android:background="@drawable/edittext_bg"
-                android:padding="10dp"/>
+                android:fontFamily="@font/dohyeon_regular"
+                android:hint="Type your message"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="18sp" />
 
             <ImageView
                 android:id="@+id/btnSend"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"
-                android:src="@drawable/send"
-                android:contentDescription="Send"/>
+                android:contentDescription="Send"
+                android:src="@drawable/send" />
         </LinearLayout>
 
     </LinearLayout>

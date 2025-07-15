@@ -7,6 +7,7 @@ import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
@@ -60,7 +61,6 @@ class QuizActivity : AppCompatActivity() {
     private val difficultyList = ArrayList<String>()
     private var currentIndex = 0
     private var score = 0
-    private var aiCount = 0
     private var normalOptions = listOf<List<String>>()
     private var normalCategory = listOf<String>()
     private var countDownTimer: CountDownTimer? = null
@@ -89,6 +89,9 @@ class QuizActivity : AppCompatActivity() {
         val quizInterface = QuizUtilities.getInstance().create(QuizInterface::class.java)
         val quizRepository = QuizRepository(quizInterface, amount, actualCategory, difficulty, type)
         var isFlipped = false
+        val sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val coinValue = sharedPreferences.getInt("coin",0)
 
 
 
@@ -180,14 +183,14 @@ class QuizActivity : AppCompatActivity() {
         }
 
         binding.imOpenChatBot.setOnClickListener{
-            if (aiCount <= 2){
+            if (coinValue >= 500){
                 val generativeModel = GenerativeModel(
                     modelName = "gemini-2.5-pro",  // or another available model
                     apiKey = "AIzaSyBTiZq5SxcS7SpEJzWaE8tVT6fH57Yh7_Q"
                 )
-                showChatbotDialog(generativeModel)
+                showChatbotDialog(generativeModel,coinValue,editor)
             }else{
-                Toast.makeText(this, "You Can Use AI Only 3 Times", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "You Can Use AI Due to Less Coins", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -377,7 +380,11 @@ class QuizActivity : AppCompatActivity() {
         }.start()
     }
 
-    private fun showChatbotDialog(generativeModel: GenerativeModel) {
+    private fun showChatbotDialog(
+        generativeModel: GenerativeModel,
+        coinValue: Int,
+        editor: SharedPreferences.Editor
+    ) {
 
         val view = LayoutInflater.from(this).inflate(R.layout.chat_bot_dialog_box, null)
 
@@ -393,7 +400,6 @@ class QuizActivity : AppCompatActivity() {
         val btnSend = view.findViewById<ImageView>(R.id.btnSend)
 
         btnSend.setOnClickListener {
-            aiCount++
             val message = etMessage.text.toString()
             val prompt = "Context: $this\n\nQuestion: $message"
             if (message.isNotBlank()) {
@@ -474,6 +480,10 @@ class QuizActivity : AppCompatActivity() {
 
                     loadingText.text = answer
                     loadingText.setTextColor(Color.BLACK)
+
+                    val newCoinValue = coinValue - 500
+                    editor.putInt("coin",newCoinValue)
+                    editor.apply()
                 }
             }
         }
