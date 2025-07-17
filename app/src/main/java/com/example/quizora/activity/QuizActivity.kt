@@ -86,8 +86,10 @@ class QuizActivity : AppCompatActivity() {
         val difficulty = intent.getStringExtra("difficulty")
         val type = intent.getStringExtra("type")
         val actualCategory = if (categoryNo == 0) null else categoryNo
+        val actualDifficulty = if (difficulty == "null") null else difficulty
+        val actualType = if (type == "null") null else type
         val quizInterface = QuizUtilities.getInstance().create(QuizInterface::class.java)
-        val quizRepository = QuizRepository(quizInterface, amount, actualCategory, difficulty, type)
+        val quizRepository = QuizRepository(quizInterface, amount, actualCategory, actualDifficulty, actualType)
         var isFlipped = false
         val sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
