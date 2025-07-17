@@ -66,8 +66,12 @@ class MainActivity : AppCompatActivity() {
         binding.rvCategory.layoutManager = GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false)
         binding.rvCategory.adapter = categoryAdapter
 
+
         binding.bottomNavigationView.setOnItemSelectedListener { menuItem->
             when(menuItem.itemId){
+                R.id.home->{
+                    true
+                }
                 R.id.randomQuiz->{
                     val intent = Intent(this, QuizActivity::class.java)
                     intent.putExtra("amount", 10)
@@ -75,14 +79,10 @@ class MainActivity : AppCompatActivity() {
                     intent.putExtra("difficulty", null as String?)
                     intent.putExtra("type", null as String?)
                     this.startActivity(intent)
-                    finish()
                     true
                 }
                 R.id.customQuiz->{
-                    val intent = Intent(this, QuizResultActivity::class.java)
-                    intent.putExtra("Score", 10)
-                    this.startActivity(intent)
-                    finish()
+                    this.startActivity(Intent(this, CustomQuizActivity::class.java))
                     true
                 }
                 R.id.setting->{
@@ -98,5 +98,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressedDispatcher.onBackPressed()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.bottomNavigationView.selectedItemId = R.id.home
     }
 }

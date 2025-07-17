@@ -47,9 +47,6 @@ class CategoryAdapter(
             intent.putExtra("difficulty", null as String?)
             intent.putExtra("type", null as String?)
             context.startActivity(intent)
-            if (context is Activity) {
-                (context as Activity).finish()
-            }
         }
 
     }

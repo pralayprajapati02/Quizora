@@ -491,13 +491,6 @@ class QuizActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    override fun onBackPressed() {
-        countDownTimer?.cancel()
-        super.onBackPressedDispatcher.onBackPressed()
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
-    }
-
     override fun onDestroy() {
         countDownTimer?.cancel()
         super.onDestroy()
