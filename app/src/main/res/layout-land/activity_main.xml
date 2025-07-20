@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:fontFamily="@font/kanit_semibold"
-            android:text="Username"
+            android:text="@string/username"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -55,7 +55,6 @@
                 android:layout_marginBottom="5dp"
                 android:drawablePadding="5dp"
                 android:fontFamily="@font/kanit_semibold"
-                android:text="200"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 app:drawableStartCompat="@drawable/coins" />

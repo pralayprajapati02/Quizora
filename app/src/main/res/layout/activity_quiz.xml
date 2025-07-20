@@ -179,7 +179,7 @@
         android:background="@drawable/orange_shape"
         android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center"
-        android:text="Next Question"
+        android:text="@string/next_question"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -251,7 +251,7 @@
                 android:fontFamily="@font/dohyeon_regular"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="00:20"
+                android:text="@string/_00_00"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />

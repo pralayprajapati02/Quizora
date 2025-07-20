@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">Quizora</string>
+    <string name="play_and_learn">PLAY\nAND\nLEARN</string>
+    <string name="ready_to_train_your_brain_like_never_before">READY TO TRAIN YOUR BRAIN LIKE NEVER BEFORE ?</string>
+    <string name="fun_games">Fun games!</string>
+    <string name="get_started">Get Started</string>
+    <string name="quizora_game">Quizora Game</string>
+    <string name="perfect_game_to_challenge_your_brain_and_have_hours_of_fun">Perfect game to challenge your brain and have hours of fun!</string>
+    <string name="choose_your_avatar">Choose Your Avatar</string>
+    <string name="username">Username</string>
+    <string name="your_name">Your Name</string>
+    <string name="_0_12">0/12</string>
+    <string name="avatars">Avatars</string>
+    <string name="save">Save</string>
+    <string name="next_question">Next Question</string>
+    <string name="_00_00">00:00</string>
+    <string name="custom_quiz">Custom Quiz</string>
+    <string name="amount">Amount :</string>
+    <string name="_10">10</string>
+    <string name="category">Category</string>
+    <string name="difficulties">Difficulties</string>
+    <string name="types">Types</string>
+    <string name="start_quiz">Start Quiz</string>
+    <string name="quiz_result">Quiz Result</string>
+    <string name="congrats">CONGRATS!</string>
+    <string name="your_score">YOUR SCORE</string>
+    <string name="earned_coins">EARNED COINS</string>
+    <string name="you_have_to_score_80_to_earn_coins">You have to score 80% to earn coins</string>
+    <string name="try_again">Try Again</string>
+    <string name="return_to_home">Return To Home</string>
+    <string name="type_your_message">Type your message</string>
+    <string name="send">Send</string>
 </resources>
