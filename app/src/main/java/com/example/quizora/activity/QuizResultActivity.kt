@@ -45,6 +45,13 @@ class QuizResultActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         var didWin: Boolean? = null
+        val amount = intent.getIntExtra("amount", 10)
+        val categoryNo = intent.getIntExtra("category", 0)
+        val difficulty = intent.getStringExtra("difficulty")
+        val type = intent.getStringExtra("type")
+        val actualCategory = if (categoryNo == 0) null else categoryNo
+        val actualDifficulty = if (difficulty == "null") null else difficulty
+        val actualType = if (type == "null") null else type
         val score = intent.getIntExtra("Score", 10)
         val noOfQuestion = intent.getIntExtra("totalNoOfQuestion", 49)
         val sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE)
@@ -136,12 +143,25 @@ class QuizResultActivity : AppCompatActivity() {
         }
         binding.tvGreetingMessage.text = message
 
+
+        binding.btnBackToHome.setOnClickListener {
+            onBackPressed()
+        }
+
+        binding.btnTryAgain.setOnClickListener {
+            val intent = Intent(this, QuizActivity::class.java)
+            intent.putExtra("amount", amount)
+            intent.putExtra("category", actualCategory)
+            intent.putExtra("difficulty", actualDifficulty)
+            intent.putExtra("type", actualType)
+            startActivity(intent)
+            finish()
+        }
+
     }
 
     override fun onBackPressed() {
         super.onBackPressedDispatcher.onBackPressed()
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
     }
 
     private fun animateNumber(target: Int, textView: TextView, editor: SharedPreferences.Editor,coinValue : Int, duration: Long = 1500L) {
@@ -166,5 +186,6 @@ class QuizResultActivity : AppCompatActivity() {
         }
         animator.start()
         editor.apply()
+        binding.tv80PerMsg.visibility = View.VISIBLE
     }
 }

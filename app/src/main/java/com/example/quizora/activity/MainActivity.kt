@@ -102,6 +102,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        val sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE)
+        val coinValue = sharedPreferences.getInt("coin",0)
+        binding.tvUserCoins.text = coinValue.toString()
         binding.bottomNavigationView.selectedItemId = R.id.home
     }
 }

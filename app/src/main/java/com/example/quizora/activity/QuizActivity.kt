@@ -30,6 +30,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.quizora.R
@@ -38,6 +39,7 @@ import com.example.quizora.api.QuizUtilities
 import com.example.quizora.databinding.ActivityQuizBinding
 import com.example.quizora.repository.QuizRepository
 import com.example.quizora.utils.Normalizer
+import com.example.quizora.utils.QuizResult
 import com.example.quizora.viewModel.QuizViewModel
 import com.example.quizora.viewModel.QuizViewModelFactory
 import com.google.ai.client.generativeai.GenerativeModel
@@ -100,6 +102,22 @@ class QuizActivity : AppCompatActivity() {
         quizViewModel =
             ViewModelProvider(this, QuizViewModelFactory(quizRepository))[QuizViewModel::class]
 
+        quizViewModel.quizStatus.observe(this) {result ->
+            when (result) {
+                is QuizResult.Success -> {
+                    // do nothing, quiz data is loaded
+                }
+                is QuizResult.NoQuestions -> {
+                    Toast.makeText(this, "No questions found for selected options.", Toast.LENGTH_LONG).show()
+                    onBackPressedDispatcher.onBackPressed()
+                }
+                is QuizResult.Failure -> {
+                    Toast.makeText(this, "Failed to fetch quiz data.", Toast.LENGTH_LONG).show()
+                    onBackPressedDispatcher.onBackPressed()
+                }
+            }
+        }
+
         quizViewModel.quiz.observe(this) {
             it.results.forEach { quiz ->
                 val normalQuestion = Normalizer().normalizeHtmlToString(quiz.question)
@@ -136,6 +154,10 @@ class QuizActivity : AppCompatActivity() {
         binding.btnNextQuestion.setOnClickListener {
             if (currentIndex + 1 >= questionList.size) {
                 val intent = Intent(this, QuizResultActivity::class.java)
+                intent.putExtra("amount", amount)
+                intent.putExtra("category", actualCategory)
+                intent.putExtra("difficulty", actualDifficulty)
+                intent.putExtra("type", actualType)
                 intent.putExtra("Score",score)
                 intent.putExtra("totalNoOfQuestion",amount)
                 startActivity(intent)
