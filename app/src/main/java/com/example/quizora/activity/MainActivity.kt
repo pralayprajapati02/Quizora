@@ -25,7 +25,6 @@ import com.example.quizora.viewModel.QuizViewModelFactory
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var quizViewModel : QuizViewModel
     private lateinit var categoryAdapter :CategoryAdapter
     private var categoryList = ArrayList<Categories>()
 
@@ -54,6 +53,13 @@ class MainActivity : AppCompatActivity() {
         val userName = sharedPreferences.getString("user_name", "")
         val userAvatar = sharedPreferences.getInt("user_avatar",0)
         val coinValue = sharedPreferences.getInt("coin",0)
+        val isMusicGlobal = sharedPreferences.getBoolean("music_global", false)
+
+        if (isMusicGlobal) {
+            val musicIntent = Intent(this, MusicManager::class.java)
+            musicIntent.putExtra("ACTION", "PLAY")
+            startService(musicIntent)
+        }
 
         binding.tvUserCoins.text = coinValue.toString()
 
@@ -86,6 +92,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.setting->{
+                    this.startActivity(Intent(this, SettingActivity::class.java))
                     true
                 }
                 else -> false
@@ -103,8 +110,34 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         val sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE)
+        val userName = sharedPreferences.getString("user_name", "")
+        val userAvatar = sharedPreferences.getInt("user_avatar",0)
         val coinValue = sharedPreferences.getInt("coin",0)
         binding.tvUserCoins.text = coinValue.toString()
         binding.bottomNavigationView.selectedItemId = R.id.home
+        binding.simvUserAvatar.setImageResource(userAvatar)
+        binding.tvUserName.text = userName
+
+        //Music
+        val playAllTime = sharedPreferences.getBoolean("MUSIC_ALL_TIME", false)
+        val playWhileQuiz = sharedPreferences.getBoolean("MUSIC_WHILE_PLAYING", false)
+
+        if (playAllTime || (playWhileQuiz && this is QuizActivity)) {
+            MusicManager.start(this)
+        } else {
+            MusicManager.stop()
+        }
     }
+
+    override fun onPause() {
+        super.onPause()
+        MusicManager.stop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        MusicManager.release()
+    }
+
+
 }

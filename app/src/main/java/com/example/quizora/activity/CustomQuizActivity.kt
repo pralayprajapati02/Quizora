@@ -141,5 +141,30 @@ class CustomQuizActivity : AppCompatActivity() {
         return adapter
     }
 
+    override fun onResume() {
+        super.onResume()
+        //Music
+        val sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE)
+        val playAllTime = sharedPreferences.getBoolean("MUSIC_ALL_TIME", false)
+        val playWhileQuiz = sharedPreferences.getBoolean("MUSIC_WHILE_PLAYING", false)
+
+        if (playAllTime || (playWhileQuiz && this is QuizActivity)) {
+            MusicManager.start(this)
+        } else {
+            MusicManager.stop()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE)
+        val playAllTime = sharedPreferences.getBoolean("MUSIC_ALL_TIME", false)
+
+        // Only stop if not in all-time mode
+        if (!playAllTime) {
+            MusicManager.stop()
+        }
+    }
+
 
 }

@@ -53,7 +53,7 @@ class QuizResultActivity : AppCompatActivity() {
         val actualDifficulty = if (difficulty == "null") null else difficulty
         val actualType = if (type == "null") null else type
         val score = intent.getIntExtra("Score", 10)
-        val noOfQuestion = intent.getIntExtra("totalNoOfQuestion", 49)
+        val noOfQuestion = intent.getIntExtra("totalNoOfQuestion", 10)
         val sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         val coinValue = sharedPreferences.getInt("coin",0)
@@ -100,6 +100,9 @@ class QuizResultActivity : AppCompatActivity() {
 
         if (didWin){
             when (noOfQuestion) {
+                in 5..9 ->{
+                    animateNumber(25,binding.tvNumberOfCoinEarned,editor,coinValue)
+                }
                 in 10..19 -> {
                     animateNumber(50,binding.tvNumberOfCoinEarned,editor,coinValue)
                 }
@@ -118,6 +121,9 @@ class QuizResultActivity : AppCompatActivity() {
             }
         }else{
             when (noOfQuestion) {
+                in 5..9 -> {
+                    animateNumberReverse(25,binding.tvNumberOfCoinEarned,editor,coinValue)
+                }
                 in 10..19 -> {
                     animateNumberReverse(50,binding.tvNumberOfCoinEarned,editor,coinValue)
                 }
@@ -176,7 +182,7 @@ class QuizResultActivity : AppCompatActivity() {
         editor.apply()
     }
 
-    private fun animateNumberReverse(target: Int, textView: TextView, editor : SharedPreferences.Editor,coinValue : Int, duration: Long = 3000L) {
+    private fun animateNumberReverse(target: Int, textView: TextView, editor : SharedPreferences.Editor, coinValue : Int, duration: Long = 3000L) {
         editor.putInt("coin",coinValue+0)
         val animator = ValueAnimator.ofInt(target,0)
         animator.duration = duration
@@ -187,5 +193,30 @@ class QuizResultActivity : AppCompatActivity() {
         animator.start()
         editor.apply()
         binding.tv80PerMsg.visibility = View.VISIBLE
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //Music
+        val sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE)
+        val playAllTime = sharedPreferences.getBoolean("MUSIC_ALL_TIME", false)
+        val playWhileQuiz = sharedPreferences.getBoolean("MUSIC_WHILE_PLAYING", false)
+
+        if (playAllTime || (playWhileQuiz && this is QuizActivity)) {
+            MusicManager.start(this)
+        } else {
+            MusicManager.stop()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE)
+        val playAllTime = sharedPreferences.getBoolean("MUSIC_ALL_TIME", false)
+
+        // Only stop if not in all-time mode
+        if (!playAllTime) {
+            MusicManager.stop()
+        }
     }
 }

@@ -17,6 +17,12 @@
         android:theme="@style/Theme.Quizora"
         tools:targetApi="31">
         <activity
+            android:name=".activity.EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.SettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.CustomQuizActivity"
             android:exported="false" />
         <activity
