@@ -66,5 +66,7 @@ dependencies {
     implementation (libs.generativeai)
     //lottie Files
     implementation (libs.lottie)
+    //ShimmerEffect
+    implementation (libs.shimmer)
 
 }

@@ -72,6 +72,10 @@ class MainActivity : AppCompatActivity() {
         binding.rvCategory.layoutManager = GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false)
         binding.rvCategory.adapter = categoryAdapter
 
+        binding.simvUserAvatar.setOnClickListener {
+            startActivity(Intent(this, SettingActivity::class.java))
+        }
+
 
         binding.bottomNavigationView.setOnItemSelectedListener { menuItem->
             when(menuItem.itemId){

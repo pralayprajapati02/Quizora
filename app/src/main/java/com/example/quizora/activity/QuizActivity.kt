@@ -42,6 +42,7 @@ import com.example.quizora.utils.Normalizer
 import com.example.quizora.utils.QuizResult
 import com.example.quizora.viewModel.QuizViewModel
 import com.example.quizora.viewModel.QuizViewModelFactory
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.ai.client.generativeai.GenerativeModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -53,6 +54,7 @@ import kotlinx.coroutines.withContext
 class QuizActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityQuizBinding
+    private lateinit var shimmerFrameLayout: ShimmerFrameLayout
     private lateinit var quizViewModel: QuizViewModel
     private val questionList = ArrayList<String>()
     private val correctAnswerList = ArrayList<String>()
@@ -82,6 +84,10 @@ class QuizActivity : AppCompatActivity() {
         }
         binding = ActivityQuizBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        shimmerFrameLayout = binding.shimmerEffectFrameQuiz
+        startShimmer()
+
 
         val amount = intent.getIntExtra("amount", 10)
         val categoryNo = intent.getIntExtra("category", 0)
@@ -138,6 +144,7 @@ class QuizActivity : AppCompatActivity() {
             }
             normalOptions = Normalizer().normalizeHtmlMutableList(optionsList)
             normalCategory = Normalizer().cleanCategoryNames(categoryList)
+            stopShimmer()
             setQuestionToViews(
                 questionList,
                 normalCategory,
@@ -223,6 +230,27 @@ class QuizActivity : AppCompatActivity() {
         }
     }
 
+    private fun startShimmer() {
+        shimmerFrameLayout.startShimmer()
+        binding.shimmerEffectFrameQuiz?.visibility = View.VISIBLE
+        binding.cvQuestionAndOptions.visibility = View.GONE
+        binding.imvOrangeGlow.visibility = View.GONE
+        binding.btnNextQuestion.visibility = View.GONE
+        binding.llProgressbar.visibility = View.GONE
+        binding.materialCardView.visibility = View.GONE
+        binding.imOpenChatBot.visibility = View.GONE
+    }
+
+    private fun stopShimmer() {
+        shimmerFrameLayout.stopShimmer()
+        binding.shimmerEffectFrameQuiz?.visibility = View.GONE
+        binding.cvQuestionAndOptions.visibility = View.VISIBLE
+        binding.imvOrangeGlow.visibility = View.VISIBLE
+        binding.btnNextQuestion.visibility = View.VISIBLE
+        binding.llProgressbar.visibility = View.VISIBLE
+        binding.materialCardView.visibility = View.VISIBLE
+        binding.imOpenChatBot.visibility = View.VISIBLE
+    }
 
 
     private fun setQuestionToViews(
@@ -241,7 +269,6 @@ class QuizActivity : AppCompatActivity() {
         binding.tvQuestionCategory.text = normalCategory[currentIndex]
         binding.tvQuestion.text = questionList[currentIndex]
         val option = normalOptions[currentIndex]
-        println(correctAnswerList[currentIndex])
         binding.btnOption1.visibility = View.VISIBLE
         binding.btnOption2.visibility = View.VISIBLE
         binding.btnOption1.text = String.format("A. ${option[0]}")

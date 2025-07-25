@@ -69,10 +69,6 @@ class CustomQuizActivity : AppCompatActivity() {
 
 
         binding.btnStartQuiz.setOnClickListener {
-            Log.d("amount","$amount")
-            Log.d("category","$category")
-            Log.d("difficulty","$difficulty")
-            Log.d("type","$type")
             val intent = Intent(this, QuizActivity::class.java)
             intent.putExtra("amount", amount)
             intent.putExtra("category", category)
