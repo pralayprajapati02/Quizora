@@ -37,6 +37,7 @@
             android:textSize="18sp" />
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvUserCoin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"

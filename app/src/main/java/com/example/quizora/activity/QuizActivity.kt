@@ -44,6 +44,9 @@ import com.example.quizora.viewModel.QuizViewModel
 import com.example.quizora.viewModel.QuizViewModelFactory
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.ai.client.generativeai.GenerativeModel
+import com.skydoves.balloon.ArrowOrientation
+import com.skydoves.balloon.Balloon
+import com.skydoves.balloon.BalloonSizeSpec
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -221,13 +224,35 @@ class QuizActivity : AppCompatActivity() {
                 )
                 showChatbotDialog(generativeModel,coinValue,editor)
             }else{
-                Toast.makeText(this, "You Can Use AI Due to Less Coins", Toast.LENGTH_SHORT).show()
+                showBalloon()
             }
         }
 
         binding.imgBack.setOnClickListener {
             onBackPressed()
         }
+    }
+
+    private fun showBalloon() {
+        val balloon = Balloon.Builder(this)
+            .setArrowSize(10)
+            .setWidthRatio(0.65f)
+            .setHeight(BalloonSizeSpec.WRAP)
+            .setArrowOrientation(ArrowOrientation.TOP)
+            .setArrowPosition(0.52f)
+            .setCornerRadius(15f)
+            .setMarginRight(10)
+            .setPadding(8)
+            .setTextGravity(0)
+            .setText("You need at least 500 coins to use the AI ChatBot. \uD83E\uDE99\nPlay more quizzes and earn coins to unlock correct answers from the AI ChatBot! \uD83E\uDD16")
+            .setTextColorResource(R.color.black)
+            .setBackgroundColorResource(R.color.orange)
+            .setTextSize(15f)
+            .setDismissWhenClicked(true)
+            .setLifecycleOwner(this)
+            .build()
+
+        balloon.showAlignBottom(binding.imOpenChatBot)
     }
 
     private fun startShimmer() {

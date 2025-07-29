@@ -68,5 +68,7 @@ dependencies {
     implementation (libs.lottie)
     //ShimmerEffect
     implementation (libs.shimmer)
+    //Skydoves Balloon
+    implementation(libs.balloon)
 
 }
