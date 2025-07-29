@@ -8,6 +8,7 @@ import android.view.Surface
 import android.view.WindowManager
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.quizora.databinding.ActivityIntroBinding
 
 class IntroActivity : AppCompatActivity() {
@@ -16,6 +17,7 @@ class IntroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        installSplashScreen()
         binding = ActivityIntroBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

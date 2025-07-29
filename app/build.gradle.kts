@@ -70,5 +70,7 @@ dependencies {
     implementation (libs.shimmer)
     //Skydoves Balloon
     implementation(libs.balloon)
+    //Splash API
+    implementation (libs.androidx.core.splashscreen)
 
 }
