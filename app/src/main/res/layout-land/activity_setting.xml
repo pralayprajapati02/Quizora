@@ -228,12 +228,13 @@
                         app:dividerColor="@color/progress_bar" />
 
                     <TextView
+                        android:id="@+id/tvPrivacyPolicy"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="15dp"
                         android:fontFamily="@font/kanit_semibold"
                         android:text="@string/privacy_policy_terms_and_condition"
-                        android:textColor="@color/progress_bar"
+                        android:textColor="@color/black"
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -246,12 +247,13 @@
                         app:dividerColor="@color/progress_bar" />
 
                     <TextView
+                        android:id="@+id/tvShareApp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="15dp"
                         android:fontFamily="@font/kanit_semibold"
                         android:text="@string/share_app_with_your_family_amp_friends"
-                        android:textColor="@color/progress_bar"
+                        android:textColor="@color/black"
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

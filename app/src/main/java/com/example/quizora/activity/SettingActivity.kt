@@ -107,6 +107,26 @@ class SettingActivity : AppCompatActivity() {
             dialog.show()
         }
 
+        binding.tvPrivacyPolicy.setOnClickListener {
+            val dialog = AlertDialog.Builder(this)
+                .setView(LayoutInflater.from(this).inflate(R.layout.privacy_policy_terms_and_conditions, null))
+                .setCancelable(true)
+                .create()
+
+            dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+            dialog.show()
+        }
+
+        binding.tvShareApp.setOnClickListener {
+            val shareIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "Download our Quizora app: https://github.com/pralayprajapati02/quizora/releases")
+                type = "text/plain"
+            }
+            startActivity(Intent.createChooser(shareIntent, "Share via"))
+        }
+
         binding.imgBack.setOnClickListener {
             onBackPressed()
         }

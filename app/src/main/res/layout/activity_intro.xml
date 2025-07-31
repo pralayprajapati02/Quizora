@@ -182,7 +182,7 @@
         android:background="@drawable/orange_shape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/clPlayStore">
+        app:layout_constraintStart_toEndOf="@+id/clGithub">
 
         <TextView
             android:id="@+id/tvGetStart"
@@ -203,7 +203,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clPlayStore"
+        android:id="@+id/clGithub"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="@drawable/bottom_right_shape"
@@ -213,10 +213,10 @@
         app:layout_constraintTop_toTopOf="@+id/btnGetStart">
 
         <ImageView
-            android:id="@+id/imvPlayStore"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/google_play_store_logo"
+            android:id="@+id/imvGithub"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/github"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

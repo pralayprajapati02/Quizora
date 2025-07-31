@@ -20,6 +20,7 @@ class IntroActivity : AppCompatActivity() {
         installSplashScreen()
         binding = ActivityIntroBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        actionBar?.hide()
 
         val sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE)
 
@@ -29,6 +30,15 @@ class IntroActivity : AppCompatActivity() {
         if (userName != null && userAvatar!=0) {
             startActivity(Intent(this,MainActivity::class.java))
             finish()
+        }
+
+        binding.clGithub.setOnClickListener {
+            val shareIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "Download our Quizora app: https://github.com/pralayprajapati02/quizora/releases")
+                type = "text/plain"
+            }
+            startActivity(Intent.createChooser(shareIntent, "Share via"))
         }
 
         val display = (this.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
