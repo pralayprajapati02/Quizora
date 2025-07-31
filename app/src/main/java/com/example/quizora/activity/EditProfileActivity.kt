@@ -73,7 +73,7 @@ class EditProfileActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
                 // Update the TextView with the current character count
                 val currentLength = s.length
-                binding.tvCharacterCount.text = String.format("$currentLength/12")
+                binding.tvCharacterCount.text = "$currentLength/12"
             }
             override fun afterTextChanged(s: Editable) {
                 // Not needed for this case
